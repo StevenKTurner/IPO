@@ -45,14 +45,16 @@ public class RGBChroma implements ColorspaceToGray{
 
     @Override
     public void setPixelColor(int R, int G, int B, int x, int y) {
-        float rPix;
-        float gPix;
-        float bPix;
+        double rPix;
+        double gPix;
+        double bPix;
+        
+        int sum = R+G+B;
         
         if ((R+G+B) != 0){
-            rPix = R/(R+G+B);
-            gPix = G/(R+G+B);
-            bPix = B/(R+G+B);
+            rPix = (((R*1.0000)/sum)*255);
+            gPix = (((G*1.0000)/sum)*255);
+            bPix = (((B*1.0000)/sum)*255);
         } else {
             rPix = 0;
             gPix = 0;
