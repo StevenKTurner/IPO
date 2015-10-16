@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import turnerColorSpace.*;
 
 /**
  *
@@ -27,27 +28,24 @@ public class IPO {
         // TODO code application logic here
         
         BufferedImage rgbImage;
-        BufferedImage greyscaleImage;
         
         try {
             rgbImage = ImageIO.read(new File("RGB16Million.png"));
             int height = rgbImage.getHeight();
             int width = rgbImage.getWidth();
-            greyscaleImage = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
-            WritableRaster raster = greyscaleImage.getRaster();
+            OhtaToGray otg = new OhtaToGray(width, height);
+            RGBChroma rgbc = new RGBChroma(width, height);
             
             for (int h=0; h<height; h++){
                 for (int w=0; w<width; w++){
-                    Color c = new Color(rgbImage.getRGB(w, h));
-                    int R = c.getRed();
-                    int G = c.getGreen();
-                    int B = c.getBlue();
-                    int l = (Math.max(Math.max(R, G), B) + Math.min(Math.min(R, G), B))/2;
-                    raster.setSample(w, h, 0, l);
+                    otg.setPixelColor(rgbImage.getRGB(w,h), w, h);
+                    rgbc.setPixelColor(rgbImage.getRGB(w,h), w, h);
                 }
             }
+
+            otg.writeGrayscaleImages("Ohta");
+            rgbc.writeGrayscaleImages("rgbChroma");
             
-            ImageIO.write(greyscaleImage, "PNG", new File("greyscale.png"));
         } catch (IOException ex) {
             Logger.getLogger(IPO.class.getName()).log(Level.SEVERE, null, ex);
         }
