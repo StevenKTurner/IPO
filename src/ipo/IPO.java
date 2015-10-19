@@ -33,18 +33,30 @@ public class IPO {
             rgbImage = ImageIO.read(new File("RGB16Million.png"));
             int height = rgbImage.getHeight();
             int width = rgbImage.getWidth();
-            OhtaToGray otg = new OhtaToGray(width, height);
-            RGBChroma rgbc = new RGBChroma(width, height);
+//            OhtaToGray otg = new OhtaToGray(width, height);
+//            RGBChromaToGray rgbc = new RGBChromaToGray(width, height);
+//            RGBToGray RGB = new RGBToGray(width, height);
+//            HSLToGray hsl = new HSLToGray(width, height);
+            ColorspaceToGray test = new SevenZeroNineToGray(width, height);
             
             for (int h=0; h<height; h++){
                 for (int w=0; w<width; w++){
-                    otg.setPixelColor(rgbImage.getRGB(w,h), w, h);
-                    rgbc.setPixelColor(rgbImage.getRGB(w,h), w, h);
+                    Color rgbPixel = new Color(rgbImage.getRGB(w, h));
+                    Color gammaRemovedPixel = TurnerUtil.invertGamma(rgbPixel);
+                    XYZColor xyzPixel = new XYZColor(gammaRemovedPixel);
+//                    otg.setPixelColor(rgbImage.getRGB(w,h), w, h);
+//                    rgbc.setPixelColor(rgbImage.getRGB(w,h), w, h);
+//                    RGB.setPixelColor(rgbImage.getRGB(w, h), w, h);
+//                    hsl.setPixelColor(rgbImage.getRGB(w, h), w, h);
+                    test.setPixelColor(rgbPixel, w, h);
                 }
             }
 
-            otg.writeGrayscaleImages("Ohta");
-            rgbc.writeGrayscaleImages("rgbChroma");
+//            otg.writeGrayscaleImages("Ohta");
+//            rgbc.writeGrayscaleImages("rgbChroma");
+//            RGB.writeGrayscaleImages("RGB");
+//            hsl.writeGrayscaleImages("HSL");
+            test.writeGrayscaleImages("16Million");
             
         } catch (IOException ex) {
             Logger.getLogger(IPO.class.getName()).log(Level.SEVERE, null, ex);

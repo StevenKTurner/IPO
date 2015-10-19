@@ -18,7 +18,7 @@ import javax.imageio.ImageIO;
  *
  * @author s14003024
  */
-public class RGBChroma implements ColorspaceToGray{
+public class RGBChromaToGray implements ColorspaceToGray{
     
     private BufferedImage r;
     private BufferedImage g;
@@ -29,7 +29,7 @@ public class RGBChroma implements ColorspaceToGray{
     
     private BufferedImage[] rgbChromaChannels = new BufferedImage[3];
     
-    public RGBChroma(int width, int height){
+    public RGBChromaToGray(int width, int height){
         r = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
         g = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
         b = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
@@ -52,9 +52,9 @@ public class RGBChroma implements ColorspaceToGray{
         int sum = R+G+B;
         
         if ((R+G+B) != 0){
-            rPix = (((R*1.0000)/sum)*255);
-            gPix = (((G*1.0000)/sum)*255);
-            bPix = (((B*1.0000)/sum)*255);
+            rPix = (((R*1.0)/sum)*255);
+            gPix = (((G*1.0)/sum)*255);
+            bPix = (((B*1.0)/sum)*255);
         } else {
             rPix = 0;
             gPix = 0;
@@ -93,7 +93,7 @@ public class RGBChroma implements ColorspaceToGray{
             ImageIO.write(g, "PNG", new File(prefix + "Channelg.png"));
             ImageIO.write(b, "PNG", new File(prefix + "Channelb.png"));
         } catch (IOException ex) {
-            Logger.getLogger(OhtaToGray.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RGBChromaToGray.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("rgb Chroma could not write images");
         }
     }
