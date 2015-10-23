@@ -30,14 +30,14 @@ public class IPO {
         BufferedImage rgbImage;
         
         try {
-            rgbImage = ImageIO.read(new File("RGB16Million.png"));
+            rgbImage = ImageIO.read(new File("Aal052.jpg"));
             int height = rgbImage.getHeight();
             int width = rgbImage.getWidth();
 //            OhtaToGray otg = new OhtaToGray(width, height);
 //            RGBChromaToGray rgbc = new RGBChromaToGray(width, height);
 //            RGBToGray RGB = new RGBToGray(width, height);
 //            HSLToGray hsl = new HSLToGray(width, height);
-            ColorspaceToGray test = new SevenZeroNineToGray(width, height);
+            LuvToGray test = new LuvToGray(width, height);
             
             for (int h=0; h<height; h++){
                 for (int w=0; w<width; w++){
@@ -48,7 +48,7 @@ public class IPO {
 //                    rgbc.setPixelColor(rgbImage.getRGB(w,h), w, h);
 //                    RGB.setPixelColor(rgbImage.getRGB(w, h), w, h);
 //                    hsl.setPixelColor(rgbImage.getRGB(w, h), w, h);
-                    test.setPixelColor(rgbPixel, w, h);
+                    test.setPixelColor(xyzPixel, w, h);
                 }
             }
 
@@ -56,7 +56,7 @@ public class IPO {
 //            rgbc.writeGrayscaleImages("rgbChroma");
 //            RGB.writeGrayscaleImages("RGB");
 //            hsl.writeGrayscaleImages("HSL");
-            test.writeGrayscaleImages("16Million");
+            test.writeGrayscaleImages("Aal052");
             
         } catch (IOException ex) {
             Logger.getLogger(IPO.class.getName()).log(Level.SEVERE, null, ex);
