@@ -29,6 +29,11 @@ public class XYZToGray implements ColorspaceToGray{
     
     private BufferedImage[] XYZChannels = new BufferedImage[3];
     
+    //Testing variables:
+//    static double xt;
+//    static double yt;
+//    static double zt;
+    
     public XYZToGray(int width, int height){
         XChannel = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
         YChannel = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
@@ -44,9 +49,18 @@ public class XYZToGray implements ColorspaceToGray{
     }
 
     public void setPixelColor(XYZColor xyz, int x, int y){
-        Xr.setSample(x, y, 0, (int) (xyz.getX()*255));
-        Yr.setSample(x, y, 0, (int) (xyz.getY()*255));
-        Zr.setSample(x, y, 0, (int) (xyz.getZ()*255));
+        double normalizedX = (xyz.getX()-XYZColor.xMin)/(XYZColor.xMax-XYZColor.xMin);
+        double normalizedY = (xyz.getY()-XYZColor.yMin)/(XYZColor.yMax-XYZColor.yMin);
+        double normalizedZ = (xyz.getZ()-XYZColor.zMin)/(XYZColor.zMax-XYZColor.zMin);
+        
+        Xr.setSample(x, y, 0, (int) (normalizedX*255));
+        Yr.setSample(x, y, 0, (int) (normalizedY*255));
+        Zr.setSample(x, y, 0, (int) (normalizedZ*255));
+        
+        //testing variables
+//        xt = xyz.getX();
+//        yt = xyz.getY();
+//        zt = xyz.getZ();
     }
     
     @Override
@@ -81,5 +95,35 @@ public class XYZToGray implements ColorspaceToGray{
             System.out.println("XYZ could not write images");
         }
     }
+    
+//    public static void main(String[] args) {
+//        XYZToGray test = new XYZToGray(1,1);
+//        double xmax = 0;
+//        double xmin = 0;
+//        double ymax = 0;
+//        double ymin = 0;
+//        double zmax = 0;
+//        double zmin = 0;
+//        for(int ri = 0; ri < 256; ri++){
+//            for (int gi = 0; gi < 256; gi++){
+//                for (int bi = 0; bi < 256; bi++){
+//                    Color temp = TurnerUtil.invertGamma(new Color(ri, gi, bi));
+//                    test.setPixelColor(temp, 0, 0);
+//                    if (xmax < xt) xmax = xt;
+//                    if (xmin > xt) xmin = xt;
+//                    if (ymax < yt) ymax = yt;
+//                    if (ymin > yt) ymin = yt;
+//                    if (zmax < zt) zmax = zt;
+//                    if (zmin > zt) zmin = zt;
+//                }
+//            }
+//        }
+//        System.out.println("Xmax = " + xmax);
+//        System.out.println("Xmin = " + xmin);
+//        System.out.println("Ymax = " + ymax);
+//        System.out.println("Ymin = " + ymin);
+//        System.out.println("Zmax = " + zmax);
+//        System.out.println("Zmin = " + zmin);
+//    }
     
 }

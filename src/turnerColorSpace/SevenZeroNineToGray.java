@@ -38,6 +38,8 @@ public class SevenZeroNineToGray implements ColorspaceToGray{
         double normalizedR = (R * 1.0)/255;
         double normalizedG = (G * 1.0)/255;
         double normalizedB = (B * 1.0)/255;
+        
+        //figures from https://en.wikipedia.org/wiki/Rec._709
         double luminance = (.2126 * normalizedR) + (.7152 * normalizedG) + (.0722 * normalizedB);
         Yr.setSample(x, y, 0, (int) (luminance*255));
     }

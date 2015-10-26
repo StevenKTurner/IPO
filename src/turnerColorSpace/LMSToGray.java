@@ -29,6 +29,11 @@ public class LMSToGray implements ColorspaceToGray{
     
     private BufferedImage[] LMSChannels = new BufferedImage[3];
     
+    //Testing variables:
+//    static double lt;
+//    static double mt;
+//    static double st;
+    
     public LMSToGray(int width, int height){
         LChannel = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
         MChannel = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
@@ -42,15 +47,25 @@ public class LMSToGray implements ColorspaceToGray{
         Mr = MChannel.getRaster();
         Sr = SChannel.getRaster();
     }
+    
+    public void setPixelColor(LMSColor lms, int x, int y){
+        double normalizedL = (lms.getL() - LMSColor.LMin)/(LMSColor.LMax - LMSColor.LMin);
+        double normalizedM = (lms.getM() - LMSColor.MMin)/(LMSColor.MMax - LMSColor.MMin);
+        double normalizedS = (lms.getS() - LMSColor.SMin)/(LMSColor.SMax - LMSColor.SMin);
+        
+        Lr.setSample(x, y, 0, (int) (normalizedL*255));
+        Mr.setSample(x, y, 0, (int) (normalizedM*255));
+        Sr.setSample(x, y, 0, (int) (normalizedS*255));
+        
+        //testing variables
+//        lt = lms.getL();
+//        mt = lms.getM();
+//        st = lms.getS();
+    }
 
     public void setPixelColor(XYZColor xyz, int x, int y){
-        double l = (.2897 * xyz.getX()) + (.689 * xyz.getY()) + (-0.0787 * xyz.getZ());
-        double m = (-.2298 * xyz.getX()) + (1.1834 * xyz.getY()) + (0.0464 * xyz.getZ());
-        double s = xyz.getZ();
-        
-        Lr.setSample(x, y, 0, (int) (l*255));
-        Mr.setSample(x, y, 0, (int) (m*255));
-        Sr.setSample(x, y, 0, (int) (s*255));
+        LMSColor lms = new LMSColor(xyz);
+        setPixelColor(lms, x, y);
     }
     
     @Override
@@ -86,4 +101,32 @@ public class LMSToGray implements ColorspaceToGray{
         }
     }
     
+//    public static void main(String[] args) {
+//        LMSToGray test = new LMSToGray(1,1);
+//        double lmax = 0;
+//        double lmin = 0;
+//        double mmax = 0;
+//        double mmin = 0;
+//        double smax = 0;
+//        double smin = 0;
+//        for(int ri = 0; ri < 256; ri++){
+//            for (int gi = 0; gi < 256; gi++){
+//                for (int bi = 0; bi < 256; bi++){
+//                    test.setPixelColor(new Color(ri, gi, bi), 0, 0);
+//                    if (lmax < lt) lmax = lt;
+//                    if (lmin > lt) lmin = lt;
+//                    if (mmax < mt) mmax = mt;
+//                    if (mmin > mt) mmin = mt;
+//                    if (smax < st) smax = st;
+//                    if (smin > st) smin = st;
+//                }
+//            }
+//        }
+//        System.out.println("Lmax = " + lmax);
+//        System.out.println("Lmin = " + lmin);
+//        System.out.println("Mmax = " + mmax);
+//        System.out.println("Mmin = " + mmin);
+//        System.out.println("Smax = " + smax);
+//        System.out.println("Smin = " + smin);
+//    }
 }

@@ -37,7 +37,7 @@ public class IPO {
 //            RGBChromaToGray rgbc = new RGBChromaToGray(width, height);
 //            RGBToGray RGB = new RGBToGray(width, height);
 //            HSLToGray hsl = new HSLToGray(width, height);
-            LuvToGray test = new LuvToGray(width, height);
+            LabToGray test = new LabToGray(width, height);
             
             for (int h=0; h<height; h++){
                 for (int w=0; w<width; w++){
