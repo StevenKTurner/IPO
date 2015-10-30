@@ -19,7 +19,7 @@ import javax.imageio.ImageIO;
  *
  * @author s14003024
  */
-public class LuvToGray implements ColorspaceToGray{
+public class LuvToGray implements ColorspaceTransform{
     
     private BufferedImage LChannel;
     private BufferedImage uChannel;

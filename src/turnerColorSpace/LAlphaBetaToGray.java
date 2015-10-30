@@ -18,7 +18,7 @@ import javax.imageio.ImageIO;
  *
  * @author s14003024
  */
-public class LAlphaBetaToGray implements ColorspaceToGray{
+public class LAlphaBetaToGray implements ColorspaceTransform{
     
     private BufferedImage LChannel;
     private BufferedImage AlphaChannel;
@@ -31,12 +31,20 @@ public class LAlphaBetaToGray implements ColorspaceToGray{
     private static final double multiTwo = 1.0/Math.sqrt(6);
     private static final double multiThree = 1.0/Math.sqrt(2);
     
+    //Constants found through testing, lMin is lowest l value from all RGB values before l hits negative infinity
+    private static final double lMax = 0.042641367383190194;
+    private static final double lMin = -13.62615651795814;
+    private static final double alphaMax = 1.9842013996470955;
+    private static final double alphaMin = -2.2138907138602066;
+    private static final double betaMax = 0.4677504078333834;
+    private static final double betaMin = -0.47031740530922006;
+    
     private BufferedImage[] LAlphaBetaChannels = new BufferedImage[3];
     
     //test variables
-    static double lt;
-    static double alphat;
-    static double betat;
+//    static double lt;
+//    static double alphat;
+//    static double betat;
     
     public LAlphaBetaToGray(int width, int height){
         LChannel = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
@@ -58,14 +66,21 @@ public class LAlphaBetaToGray implements ColorspaceToGray{
         double alpha = (multiTwo * Math.log(lms.getL())) + (multiTwo * Math.log(lms.getM())) - (2 * multiTwo * Math.log(lms.getS()));
         double beta = (multiThree * Math.log(lms.getL())) - (multiThree * Math.log(lms.getM()));
         
-        lt = l;
-        alphat = alpha;
-        betat = beta;
+        if (l == Double.NEGATIVE_INFINITY) l = lMin;
         
-        //This is wrong, I need to normalize the channels (once I figure out the lower limit of L)
-        Lr.setSample(x, y, 0, (int) (l*255));
-        Alphar.setSample(x, y, 0, (int) (alpha*255));
-        Betar.setSample(x, y, 0, (int) (beta*255));
+        //normalize values
+        double normalizedl = (l - lMin)/(lMax-lMin);
+        double normalizedAlpha = (alpha - alphaMin)/(alphaMax - alphaMin);
+        double normalizedBeta = (beta - betaMin)/(betaMax - betaMin);
+        
+        Lr.setSample(x, y, 0, (int) (normalizedl*255));
+        Alphar.setSample(x, y, 0, (int) (normalizedAlpha*255));
+        Betar.setSample(x, y, 0, (int) (normalizedBeta*255));
+        
+        //Test Variables
+//        lt = l;
+//        alphat = alpha;
+//        betat = beta;
     }
 
     public void setPixelColor(XYZColor xyz, int x, int y){
@@ -106,33 +121,33 @@ public class LAlphaBetaToGray implements ColorspaceToGray{
         }
     }
     
-    public static void main(String[] args) {
-        LAlphaBetaToGray test = new LAlphaBetaToGray(1,1);
-        double lmax = 0.0;
-        double lmin = 0.0;
-        double alphaMax = 0.0;
-        double alphaMin = 0.0;
-        double betaMax = 0.0;
-        double betaMin = 0.0;
-        for(int ri = 0; ri < 256; ri++){
-            for (int gi = 0; gi < 256; gi++){
-                for (int bi = 0; bi < 256; bi++){
-                    test.setPixelColor(new Color(ri, gi, bi), 0, 0);
-                    if (lmax < lt) lmax = lt;
-                    if (lmin > lt) lmin = lt;
-                    if (alphaMax < alphat) alphaMax = alphat;
-                    if (alphaMin > alphat) alphaMin = alphat;
-                    if (betaMax < betat) betaMax = betat;
-                    if (betaMin > betat) betaMin = betat;
-                }
-            }
-        }
-        System.out.println("Lmax = " + lmax);
-        System.out.println("Lmin = " + lmin);
-        System.out.println("Alphamax = " + alphaMax);
-        System.out.println("Alphamin = " + alphaMin);
-        System.out.println("betamax = " + betaMax);
-        System.out.println("betamin = " + betaMin);
-    }
+//    public static void main(String[] args) {
+//        LAlphaBetaToGray test = new LAlphaBetaToGray(1,1);
+//        double lmax = 0.0;
+//        double lmin = 0.0;
+//        double alphaMax = 0.0;
+//        double alphaMin = 0.0;
+//        double betaMax = 0.0;
+//        double betaMin = 0.0;
+//        for(int ri = 0; ri < 256; ri++){
+//            for (int gi = 0; gi < 256; gi++){
+//                for (int bi = 0; bi < 256; bi++){
+//                    test.setPixelColor(new Color(ri, gi, bi), 0, 0);
+//                    if (lmax < lt) lmax = lt;
+//                    if ((lmin > lt) && (lt != Double.NEGATIVE_INFINITY)) lmin = lt;
+//                    if (alphaMax < alphat) alphaMax = alphat;
+//                    if (alphaMin > alphat) alphaMin = alphat;
+//                    if (betaMax < betat) betaMax = betat;
+//                    if (betaMin > betat) betaMin = betat;
+//                }
+//            }
+//        }
+//        System.out.println("Lmax = " + lmax);
+//        System.out.println("Lmin = " + lmin);
+//        System.out.println("Alphamax = " + alphaMax);
+//        System.out.println("Alphamin = " + alphaMin);
+//        System.out.println("betamax = " + betaMax);
+//        System.out.println("betamin = " + betaMin);
+//    }
     
 }

@@ -18,7 +18,7 @@ import javax.imageio.ImageIO;
  *
  * @author Steven Turner
  */
-public class OhtaToGray implements ColorspaceToGray{
+public class OhtaToGray implements ColorspaceTransform{
     
     private BufferedImage l1;
     private BufferedImage l2;

@@ -18,7 +18,7 @@ import javax.imageio.ImageIO;
  *
  * @author s14003024
  */
-public class HSLToGray implements ColorspaceToGray{
+public class HSLToGray implements ColorspaceTransform{
     
     private BufferedImage SChannel;
     private BufferedImage LChannel;

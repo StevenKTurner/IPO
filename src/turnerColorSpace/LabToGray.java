@@ -19,7 +19,7 @@ import javax.imageio.ImageIO;
  *
  * @author s14003024
  */
-public class LabToGray implements ColorspaceToGray{
+public class LabToGray implements ColorspaceTransform{
     
     private BufferedImage LChannel;
     private BufferedImage aChannel;

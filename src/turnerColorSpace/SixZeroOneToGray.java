@@ -18,7 +18,7 @@ import javax.imageio.ImageIO;
  *
  * @author s14003024
  */
-public class SixZeroOneToGray implements ColorspaceToGray{
+public class SixZeroOneToGray implements ColorspaceTransform{
     
     private BufferedImage YChannel;
     private WritableRaster Yr;

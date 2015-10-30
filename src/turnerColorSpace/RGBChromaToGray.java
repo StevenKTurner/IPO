@@ -18,7 +18,7 @@ import javax.imageio.ImageIO;
  *
  * @author s14003024
  */
-public class RGBChromaToGray implements ColorspaceToGray{
+public class RGBChromaToGray implements ColorspaceTransform{
     
     private BufferedImage r;
     private BufferedImage g;

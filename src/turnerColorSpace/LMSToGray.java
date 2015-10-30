@@ -18,7 +18,7 @@ import javax.imageio.ImageIO;
  *
  * @author s14003024
  */
-public class LMSToGray implements ColorspaceToGray{
+public class LMSToGray implements ColorspaceTransform{
     
     private BufferedImage LChannel;
     private BufferedImage MChannel;

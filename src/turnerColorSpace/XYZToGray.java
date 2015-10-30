@@ -18,7 +18,7 @@ import javax.imageio.ImageIO;
  *
  * @author s14003024
  */
-public class XYZToGray implements ColorspaceToGray{
+public class XYZToGray implements ColorspaceTransform{
     
     private BufferedImage XChannel;
     private BufferedImage YChannel;

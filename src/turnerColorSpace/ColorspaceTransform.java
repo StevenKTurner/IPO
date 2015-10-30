@@ -12,13 +12,13 @@ import java.awt.image.BufferedImage;
  *
  * @author Steven Turner
  */
-public interface ColorspaceToGray {
+public interface ColorspaceTransform {
 
     /**Takes R, G and B values and generates a grayscale pixel for different channels depending on the specific colorspace used.
      *
      * @param R Requires int R of red
      * @param G Requires int G of green
-     * @param B Requries int B of blue
+     * @param B Requires int B of blue
      */
     void setPixelColor(int R, int G, int B, int x, int y);
     /**Takes a Color and generates a grayscale pixel for different channels depending on the specific colorspace used.
