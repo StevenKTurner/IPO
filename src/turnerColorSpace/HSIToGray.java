@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -89,6 +90,20 @@ public class HSIToGray implements ColorspaceTransform{
             Logger.getLogger(HSIToGray.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("HSI could not write images");
         }
+    }
+    
+    public void writeGrayscaleImages(File location, String prefix) {
+        try {
+            ImageIO.write(SChannel, "PNG", new File(location, prefix + "HSISaturation.png"));
+            ImageIO.write(IChannel, "PNG", new File(location, prefix + "HSIIntensity.png"));
+        } catch (IOException ex) {
+            Logger.getLogger(HSIToGray.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("HSI could not write images");
+        }
+    }
+    
+    public ColorSpace getColorSpace(){
+        return ColorSpace.HSI;
     }
     
 }

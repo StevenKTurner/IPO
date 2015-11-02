@@ -51,11 +51,19 @@ public class GrayToBinary {
     
     public void writeBinaryImages(String prefix){
         try {
-//            ImageIO.write(LChannel, "PNG", new File(prefix + "LabL.png"));
-//            ImageIO.write(aChannel, "PNG", new File(prefix + "Laba.png"));
-//            ImageIO.write(bChannel, "PNG", new File(prefix + "Labb.png"));
             for (int i = 0; i < binaryImages.length; i++){
                 ImageIO.write(binaryImages[i], "PNG", new File(prefix + i + ".png"));
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(GrayToBinary.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Gray to Binary could not write images");
+        }
+    }
+    
+    public void writeBinaryImages(File location, String prefix){
+        try {
+            for (int i = 0; i < binaryImages.length; i++){
+                ImageIO.write(binaryImages[i], "PNG", new File(location, prefix + i + ".png"));
             }
         } catch (IOException ex) {
             Logger.getLogger(GrayToBinary.class.getName()).log(Level.SEVERE, null, ex);

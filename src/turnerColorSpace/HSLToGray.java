@@ -91,4 +91,18 @@ public class HSLToGray implements ColorspaceTransform{
         }
     }
     
+    public void writeGrayscaleImages(File location, String prefix) {
+        try {
+            ImageIO.write(SChannel, "PNG", new File(location, prefix + "HSLSaturation.png"));
+            ImageIO.write(LChannel, "PNG", new File(location, prefix + "HSLLightness.png"));
+        } catch (IOException ex) {
+            Logger.getLogger(HSLToGray.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("HSL could not write images");
+        }
+    }
+    
+    public ColorSpace getColorSpace(){
+        return ColorSpace.HSL;
+    }
+    
 }

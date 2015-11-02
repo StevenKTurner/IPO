@@ -72,4 +72,17 @@ public class SixZeroOneToGray implements ColorspaceTransform{
         }
     }
     
+    public void writeGrayscaleImages(File location, String prefix) {
+        try {
+            ImageIO.write(YChannel, "PNG", new File(location, prefix + "601Y.png"));
+        } catch (IOException ex) {
+            Logger.getLogger(SixZeroOneToGray.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("601 could not write images");
+        }
+    }
+    
+    public ColorSpace getColorSpace(){
+        return ColorSpace.sixZeroOne;
+    }
+    
 }

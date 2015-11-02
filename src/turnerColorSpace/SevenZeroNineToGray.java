@@ -74,4 +74,17 @@ public class SevenZeroNineToGray implements ColorspaceTransform{
         }
     }
     
+    public void writeGrayscaleImages(File location, String prefix) {
+        try {
+            ImageIO.write(YChannel, "PNG", new File(location, prefix + "709Y.png"));
+        } catch (IOException ex) {
+            Logger.getLogger(SevenZeroNineToGray.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("709 could not write images");
+        }
+    }
+    
+    public ColorSpace getColorSpace(){
+        return ColorSpace.sevenZeroNine;
+    }
+    
 }

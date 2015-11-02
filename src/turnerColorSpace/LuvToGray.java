@@ -146,6 +146,21 @@ public class LuvToGray implements ColorspaceTransform{
         }
     }
     
+    public void writeGrayscaleImages(File location, String prefix) {
+        try {
+            ImageIO.write(LChannel, "PNG", new File(location, prefix + "LuvL.png"));
+            ImageIO.write(uChannel, "PNG", new File(location, prefix + "Luvu.png"));
+            ImageIO.write(vChannel, "PNG", new File(location, prefix + "Luvv.png"));
+        } catch (IOException ex) {
+            Logger.getLogger(LuvToGray.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Luv could not write images");
+        }
+    }
+    
+    public ColorSpace getColorSpace(){
+        return ColorSpace.Luv;
+    }
+    
 //    public static void main(String[] args) {
 //        LuvToGray test = new LuvToGray(1,1);
 //        double lmax = 0;

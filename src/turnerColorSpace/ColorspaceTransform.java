@@ -7,13 +7,14 @@ package turnerColorSpace;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.io.File;
 
 /**
  *
  * @author Steven Turner
  */
 public interface ColorspaceTransform {
-
+    
     /**Takes R, G and B values and generates a grayscale pixel for different channels depending on the specific colorspace used.
      *
      * @param R Requires int R of red
@@ -43,4 +44,7 @@ public interface ColorspaceTransform {
      * @param prefix the prefix of the filename to be created
      */
     void writeGrayscaleImages(String prefix);
+    void writeGrayscaleImages(File location, String prefix);
+    
+    ColorSpace getColorSpace();
 }

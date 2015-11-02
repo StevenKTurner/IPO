@@ -92,13 +92,28 @@ public class LMSToGray implements ColorspaceTransform{
     @Override
     public void writeGrayscaleImages(String prefix) {
         try {
-            ImageIO.write(LChannel, "PNG", new File(prefix + "Long.png"));
-            ImageIO.write(MChannel, "PNG", new File(prefix + "Medium.png"));
-            ImageIO.write(SChannel, "PNG", new File(prefix + "Short.png"));
+            ImageIO.write(LChannel, "PNG", new File(prefix + "LMSLong.png"));
+            ImageIO.write(MChannel, "PNG", new File(prefix + "LMSMedium.png"));
+            ImageIO.write(SChannel, "PNG", new File(prefix + "LMSShort.png"));
         } catch (IOException ex) {
             Logger.getLogger(LMSToGray.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("LMS could not write images");
         }
+    }
+    
+    public void writeGrayscaleImages(File location, String prefix) {
+        try {
+            ImageIO.write(LChannel, "PNG", new File(location, prefix + "LMSLong.png"));
+            ImageIO.write(MChannel, "PNG", new File(location, prefix + "LMSMedium.png"));
+            ImageIO.write(SChannel, "PNG", new File(location, prefix + "LMSShort.png"));
+        } catch (IOException ex) {
+            Logger.getLogger(LMSToGray.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("LMS could not write images");
+        }
+    }
+    
+    public ColorSpace getColorSpace(){
+        return ColorSpace.LMS;
     }
     
 //    public static void main(String[] args) {

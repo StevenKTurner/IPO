@@ -87,13 +87,28 @@ public class XYZToGray implements ColorspaceTransform{
     @Override
     public void writeGrayscaleImages(String prefix) {
         try {
-            ImageIO.write(XChannel, "PNG", new File(prefix + "ChannelX.png"));
-            ImageIO.write(YChannel, "PNG", new File(prefix + "ChannelY.png"));
-            ImageIO.write(ZChannel, "PNG", new File(prefix + "ChannelZ.png"));
+            ImageIO.write(XChannel, "PNG", new File(prefix + "XYZChannelX.png"));
+            ImageIO.write(YChannel, "PNG", new File(prefix + "XYZChannelY.png"));
+            ImageIO.write(ZChannel, "PNG", new File(prefix + "XYZChannelZ.png"));
         } catch (IOException ex) {
             Logger.getLogger(XYZToGray.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("XYZ could not write images");
         }
+    }
+    
+    public void writeGrayscaleImages(File location, String prefix) {
+        try {
+            ImageIO.write(XChannel, "PNG", new File(location, prefix + "XYZChannelX.png"));
+            ImageIO.write(YChannel, "PNG", new File(location, prefix + "XYZChannelY.png"));
+            ImageIO.write(ZChannel, "PNG", new File(location, prefix + "XYZChannelZ.png"));
+        } catch (IOException ex) {
+            Logger.getLogger(XYZToGray.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("XYZ could not write images");
+        }
+    }
+    
+    public ColorSpace getColorSpace(){
+        return ColorSpace.XYZ;
     }
     
 //    public static void main(String[] args) {

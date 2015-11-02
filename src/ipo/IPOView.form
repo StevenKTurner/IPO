@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="outputLocationButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="outputLocationLabel" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="outputGrayCheck" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="outputBinaryCheck" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="runButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="selectImageButton" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="HSVCheck" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+                              <Component id="LMSCheck" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="HSICheck" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                              <Component id="LAlphaBetaCheck" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="RGBCheck" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="XYZCheck" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                              <Component id="ohtaCheck" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="rgbCheck" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="LabCheck" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="HSLCheck" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                                      <Component id="LuvCheck" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="rec709Check" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rec601Check" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="gammaField" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabel4" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="progressBar" min="-2" pref="286" max="-2" attributes="0"/>
+                      <EmptySpace pref="29" max="32767" attributes="0"/>
+                      <Component id="cancelButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="selectImageButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="RGBCheck" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="XYZCheck" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="ohtaCheck" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="rgbCheck" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="LabCheck" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="rec601Check" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="HSLCheck" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="LuvCheck" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="rec709Check" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="HSVCheck" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="LMSCheck" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="HSICheck" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="LAlphaBetaCheck" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="gammaField" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="outputLocationButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="outputLocationLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="outputGrayCheck" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="outputBinaryCheck" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="runButton" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="cancelButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="progressBar" pref="30" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JButton" name="selectImageButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Select Images"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="selectImageButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Select Channels to Output to Gray:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="RGBCheck">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Red, Green, Blue"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="rgbCheck">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="RG Chroma (rgb)"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="HSLCheck">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="SL (HSL)"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="HSVCheck">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="SV (HSV)"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="HSICheck">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="SI (HSI)"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="XYZCheck">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="XYZ"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="LabCheck">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="L*a*b*"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="LuvCheck">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Luv"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="LMSCheck">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="LMS"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="LAlphaBetaCheck">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="L Alpha Beta"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="ohtaCheck">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ohta"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="rec601Check">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Rec601 YCbCr"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="rec709Check">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Rec709 YCbCr"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel4">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Enter Gamma:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="gammaField">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="2.2222"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="runButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Run"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="runButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="outputLocationButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Select Output Location"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="outputLocationButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="outputLocationLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Location"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="outputGrayCheck">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Output Gray"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="outputBinaryCheck">
+      <Properties>
+        <Property name="selected" type="boolean" value="true"/>
+        <Property name="text" type="java.lang.String" value="Output Binary"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JProgressBar" name="progressBar">
+    </Component>
+    <Component class="javax.swing.JButton" name="cancelButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Cancel"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>

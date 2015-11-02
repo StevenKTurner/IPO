@@ -91,4 +91,18 @@ public class HSVToGray implements ColorspaceTransform{
         }
     }
     
+    public void writeGrayscaleImages(File location, String prefix) {
+        try {
+            ImageIO.write(SChannel, "PNG", new File(location, prefix + "HSVSaturation.png"));
+            ImageIO.write(VChannel, "PNG", new File(location, prefix + "HSVValue.png"));
+        } catch (IOException ex) {
+            Logger.getLogger(HSVToGray.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("HSV could not write images");
+        }
+    }
+    
+    public ColorSpace getColorSpace(){
+        return ColorSpace.HSV;
+    }
+    
 }

@@ -73,13 +73,27 @@ public class RGBToGray implements ColorspaceTransform{
     @Override
     public void writeGrayscaleImages(String prefix) {
         try {
-            ImageIO.write(RChannel, "PNG", new File(prefix + "ChannelR.png"));
-            ImageIO.write(GChannel, "PNG", new File(prefix + "ChannelG.png"));
-            ImageIO.write(BChannel, "PNG", new File(prefix + "ChannelB.png"));
+            ImageIO.write(RChannel, "PNG", new File(prefix + "RGBChannelR.png"));
+            ImageIO.write(GChannel, "PNG", new File(prefix + "RGBChannelG.png"));
+            ImageIO.write(BChannel, "PNG", new File(prefix + "RGBChannelB.png"));
         } catch (IOException ex) {
             Logger.getLogger(RGBToGray.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("RGB could not write images");
         }
     }
     
+    public void writeGrayscaleImages(File location, String prefix) {
+        try {
+            ImageIO.write(RChannel, "PNG", new File(location, prefix + "RGBChannelR.png"));
+            ImageIO.write(GChannel, "PNG", new File(location, prefix + "RGBChannelG.png"));
+            ImageIO.write(BChannel, "PNG", new File(location, prefix + "RGBChannelB.png"));
+        } catch (IOException ex) {
+            Logger.getLogger(RGBToGray.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("RGB could not write images");
+        }
+    }
+    
+    public ColorSpace getColorSpace(){
+        return ColorSpace.RGB;
+    }
 }

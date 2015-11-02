@@ -121,6 +121,21 @@ public class LAlphaBetaToGray implements ColorspaceTransform{
         }
     }
     
+    public void writeGrayscaleImages(File location, String prefix) {
+        try {
+            ImageIO.write(LChannel, "PNG", new File(location, prefix + "LAlphaBetaL.png"));
+            ImageIO.write(AlphaChannel, "PNG", new File(location, prefix + "LAlphaBetaAlpha.png"));
+            ImageIO.write(BetaChannel, "PNG", new File(location, prefix + "LAlphaBetaBeta.png"));
+        } catch (IOException ex) {
+            Logger.getLogger(LAlphaBetaToGray.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("LAlphaBeta could not write images");
+        }
+    }
+    
+    public ColorSpace getColorSpace(){
+        return ColorSpace.LAlphaBeta;
+    }
+    
 //    public static void main(String[] args) {
 //        LAlphaBetaToGray test = new LAlphaBetaToGray(1,1);
 //        double lmax = 0.0;
@@ -134,7 +149,9 @@ public class LAlphaBetaToGray implements ColorspaceTransform{
 //                for (int bi = 0; bi < 256; bi++){
 //                    test.setPixelColor(new Color(ri, gi, bi), 0, 0);
 //                    if (lmax < lt) lmax = lt;
-//                    if ((lmin > lt) && (lt != Double.NEGATIVE_INFINITY)) lmin = lt;
+//                    if ((lmin > lt) && (lt != Double.NEGATIVE_INFINITY)){ 
+//                        lmin = lt;
+//                    }
 //                    if (alphaMax < alphat) alphaMax = alphat;
 //                    if (alphaMin > alphat) alphaMin = alphat;
 //                    if (betaMax < betat) betaMax = betat;

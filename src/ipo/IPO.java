@@ -24,46 +24,46 @@ public class IPO {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        
-        BufferedImage rgbImage;
-        
-        try {
-            rgbImage = ImageIO.read(new File("RGB16Million.png"));
-            int height = rgbImage.getHeight();
-            int width = rgbImage.getWidth();
-//            OhtaToGray otg = new OhtaToGray(width, height);
-//            RGBChromaToGray rgbc = new RGBChromaToGray(width, height);
-//            RGBToGray RGB = new RGBToGray(width, height);
-//            HSLToGray hsl = new HSLToGray(width, height);
-            LAlphaBetaToGray test = new LAlphaBetaToGray(width, height);
-            
-            for (int h=0; h<height; h++){
-                for (int w=0; w<width; w++){
-                    Color rgbPixel = new Color(rgbImage.getRGB(w, h));
-                    Color gammaRemovedPixel = TurnerUtil.invertGamma(rgbPixel);
-                    XYZColor xyzPixel = new XYZColor(gammaRemovedPixel);
-//                    otg.setPixelColor(rgbImage.getRGB(w,h), w, h);
-//                    rgbc.setPixelColor(rgbImage.getRGB(w,h), w, h);
-//                    RGB.setPixelColor(rgbImage.getRGB(w, h), w, h);
-//                    hsl.setPixelColor(rgbImage.getRGB(w, h), w, h);
-                    test.setPixelColor(xyzPixel, w, h);
-                }
-            }
-
-//            otg.writeGrayscaleImages("Ohta");
-//            rgbc.writeGrayscaleImages("rgbChroma");
-//            RGB.writeGrayscaleImages("RGB");
-//            hsl.writeGrayscaleImages("HSL");
-            test.writeGrayscaleImages("16Million");
-            GrayToBinary test2 = new GrayToBinary(test.getGrayscaleImages(), new OtsuThreshold());
-            test2.writeBinaryImages("16MillionLAlphaBeta");
-            
-        } catch (IOException ex) {
-            Logger.getLogger(IPO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
+//    public static void main(String[] args) {
+//        // TODO code application logic here
+//        
+//        BufferedImage rgbImage;
+//        
+//        try {
+//            rgbImage = ImageIO.read(new File("Aal052.jpg"));
+//            int height = rgbImage.getHeight();
+//            int width = rgbImage.getWidth();
+////            OhtaToGray otg = new OhtaToGray(width, height);
+////            RGBChromaToGray rgbc = new RGBChromaToGray(width, height);
+////            RGBToGray RGB = new RGBToGray(width, height);
+////            HSLToGray hsl = new HSLToGray(width, height);
+//            LAlphaBetaToGray test = new LAlphaBetaToGray(width, height);
+//            
+//            for (int h=0; h<height; h++){
+//                for (int w=0; w<width; w++){
+//                    Color rgbPixel = new Color(rgbImage.getRGB(w, h));
+//                    Color gammaRemovedPixel = TurnerUtil.invertGamma(rgbPixel);
+//                    XYZColor xyzPixel = new XYZColor(gammaRemovedPixel);
+////                    otg.setPixelColor(rgbImage.getRGB(w,h), w, h);
+////                    rgbc.setPixelColor(rgbImage.getRGB(w,h), w, h);
+////                    RGB.setPixelColor(rgbImage.getRGB(w, h), w, h);
+////                    hsl.setPixelColor(rgbImage.getRGB(w, h), w, h);
+//                    test.setPixelColor(xyzPixel, w, h);
+//                }
+//            }
+//
+////            otg.writeGrayscaleImages("Ohta");
+////            rgbc.writeGrayscaleImages("rgbChroma");
+////            RGB.writeGrayscaleImages("RGB");
+////            hsl.writeGrayscaleImages("HSL");
+//            test.writeGrayscaleImages("Aal052");
+//            GrayToBinary test2 = new GrayToBinary(test.getGrayscaleImages(), new OtsuThreshold());
+//            test2.writeBinaryImages("Aal052LAlphaBeta");
+//            
+//        } catch (IOException ex) {
+//            Logger.getLogger(IPO.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        
+//    }
     
 }

@@ -79,13 +79,28 @@ public class OhtaToGray implements ColorspaceTransform{
     @Override
     public void writeGrayscaleImages(String prefix) {
         try {
-            ImageIO.write(l1, "PNG", new File(prefix + "l1.png"));
-            ImageIO.write(l2, "PNG", new File(prefix + "l2.png"));
-            ImageIO.write(l3, "PNG", new File(prefix + "l3.png"));
+            ImageIO.write(l1, "PNG", new File(prefix + "Ohtal1.png"));
+            ImageIO.write(l2, "PNG", new File(prefix + "Ohtal2.png"));
+            ImageIO.write(l3, "PNG", new File(prefix + "Ohtal3.png"));
         } catch (IOException ex) {
             Logger.getLogger(OhtaToGray.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Ohta could not write images");
         }
+    }
+    
+    public void writeGrayscaleImages(File location, String prefix) {
+        try {
+            ImageIO.write(l1, "PNG", new File(location, prefix + "Ohtal1.png"));
+            ImageIO.write(l2, "PNG", new File(location, prefix + "Ohtal2.png"));
+            ImageIO.write(l3, "PNG", new File(location, prefix + "Ohtal3.png"));
+        } catch (IOException ex) {
+            Logger.getLogger(OhtaToGray.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Ohta could not write images");
+        }
+    }
+    
+    public ColorSpace getColorSpace(){
+        return ColorSpace.Ohta;
     }
     
 }

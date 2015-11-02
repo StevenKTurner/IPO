@@ -146,6 +146,21 @@ public class LabToGray implements ColorspaceTransform{
         }
     }
     
+    public void writeGrayscaleImages(File location, String prefix) {
+        try {
+            ImageIO.write(LChannel, "PNG", new File(location, prefix + "LabL.png"));
+            ImageIO.write(aChannel, "PNG", new File(location, prefix + "Laba.png"));
+            ImageIO.write(bChannel, "PNG", new File(location, prefix + "Labb.png"));
+        } catch (IOException ex) {
+            Logger.getLogger(LabToGray.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Lab could not write images");
+        }
+    }
+    
+    public ColorSpace getColorSpace(){
+        return ColorSpace.Lab;
+    }
+    
 //    public static void main(String[] args) {
 //        LabToGray test = new LabToGray(1,1);
 //        double lmax = 0;
