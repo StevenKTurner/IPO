@@ -31,8 +31,8 @@ public class HSVToGray implements ColorspaceTransform{
         SChannel = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
         VChannel = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
         
-        SVChannels[1] = SChannel;
-        SVChannels[2] = VChannel;
+        SVChannels[0] = SChannel;
+        SVChannels[1] = VChannel;
         
         Sr = SChannel.getRaster();
         Vr = VChannel.getRaster();

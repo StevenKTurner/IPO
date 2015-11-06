@@ -31,8 +31,8 @@ public class HSLToGray implements ColorspaceTransform{
         SChannel = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
         LChannel = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
         
-        SLChannels[1] = SChannel;
-        SLChannels[2] = LChannel;
+        SLChannels[0] = SChannel;
+        SLChannels[1] = LChannel;
         
         Sr = SChannel.getRaster();
         Lr = LChannel.getRaster();

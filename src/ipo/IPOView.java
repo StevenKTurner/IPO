@@ -14,8 +14,10 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JProgressBar;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import turnerColorSpace.*;
 
@@ -30,6 +32,7 @@ public class IPOView extends javax.swing.JFrame {
     private static File outputFolder;
     private static double gammaValue;
     private HashMap<String, Boolean> conversionMap;
+    private ImageWorker imageWorker;
     /**
      * Creates new form IPOView
      */
@@ -138,6 +141,11 @@ public class IPOView extends javax.swing.JFrame {
 
         cancelButton.setText("Cancel");
         cancelButton.setEnabled(false);
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -267,6 +275,9 @@ public class IPOView extends javax.swing.JFrame {
 
     private void runButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runButtonActionPerformed
         // TODO add your handling code here:
+        progressBar.setValue(0);
+        progressBar.setStringPainted(true);
+        
         if (imageFiles == null || outputFolder == null || (!outputGrayCheck.isSelected() && !outputBinaryCheck.isSelected())){
             JOptionPane.showMessageDialog(rootPane, "Please select an Image file and a Destination folder, and select at least one output format");
         } else {
@@ -294,9 +305,11 @@ public class IPOView extends javax.swing.JFrame {
             conversionMap.put("Grayscale", outputGrayCheck.isSelected());
             conversionMap.put("Binary", outputBinaryCheck.isSelected());
             //run through the files to process
-            ImageWorker imageWorker = new ImageWorker(imageFiles, outputFolder, conversionMap, gammaValue, progressBar);
+            imageWorker = new ImageWorker(imageFiles, outputFolder, conversionMap, gammaValue, this);
             imageWorker.addPropertyChangeListener(new StatusListener(progressBar));
             imageWorker.execute();
+            runButton.setEnabled(false);
+            cancelButton.setEnabled(true);
         }
     }//GEN-LAST:event_runButtonActionPerformed
 
@@ -311,6 +324,14 @@ public class IPOView extends javax.swing.JFrame {
             outputLocationLabel.setText(outputFolder.getPath());
         }
     }//GEN-LAST:event_outputLocationButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        // TODO add your handling code here:
+        boolean check = imageWorker.cancel(true);
+        if (check){
+            runButton.setEnabled(true);
+        }
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -345,6 +366,18 @@ public class IPOView extends javax.swing.JFrame {
                 new IPOView().setVisible(true);
             }
         });
+    }
+    
+    public JProgressBar getProgressBar(){
+        return progressBar;
+    }
+    
+    public JButton getRunButton(){
+        return runButton;
+    }
+    
+    public JButton getCancelButton(){
+        return cancelButton;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

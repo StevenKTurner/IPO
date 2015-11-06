@@ -3,13 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Z:/Code/Java/IPO/src/turnerColorSpace/GrayToBinary.java</file>
-            <file>file:/Z:/Code/Java/IPO/src/turnerColorSpace/ColorspaceTransform.java</file>
             <file>file:/Z:/Code/Java/IPO/src/ipo/ImageWorker.java</file>
             <file>file:/Z:/Code/Java/IPO/src/ipo/IPO.java</file>
             <file>file:/Z:/Code/Java/IPO/src/ipo/IPOView.java</file>
-            <file>file:/Z:/Code/Java/IPO/src/ipo/StatusListener.java</file>
-            <file>file:/Z:/Code/Java/IPO/src/turnerColorSpace/HSLToGray.java</file>
         </group>
     </open-files>
 </project-private>

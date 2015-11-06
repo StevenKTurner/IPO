@@ -32,8 +32,8 @@ public class HSIToGray implements ColorspaceTransform{
         SChannel = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
         IChannel = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
         
-        SIChannels[1] = SChannel;
-        SIChannels[2] = IChannel;
+        SIChannels[0] = SChannel;
+        SIChannels[1] = IChannel;
         
         Sr = SChannel.getRaster();
         Ir = IChannel.getRaster();

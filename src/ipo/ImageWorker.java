@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import javax.swing.SwingWorker;
@@ -35,21 +36,27 @@ public class ImageWorker extends SwingWorker<String, String>{
     private double gammaValue;
     private ArrayList<ColorspaceTransform> transforms;
     private JProgressBar bar;
+    private JButton runButton;
+    private JButton cancelButton;
     
-    public ImageWorker(ArrayList<File> imageFiles, File outputFolder, HashMap<String, Boolean> conversionTypes, double gammaValue, JProgressBar bar){
+    public ImageWorker(ArrayList<File> imageFiles, File outputFolder, HashMap<String, Boolean> conversionTypes, double gammaValue, IPOView view){
         this.imageFiles = imageFiles;
         this.conversionMap = conversionTypes;
         this.outputFolder = outputFolder;
         this.gammaValue = gammaValue;
         transforms = new ArrayList();
-        this.bar = bar;
+        this.bar = view.getProgressBar();
+        this.runButton = view.getRunButton();
+        this.cancelButton = view.getCancelButton();
     }
 
     @Override
     protected String doInBackground() throws Exception {
-        System.out.println("working...");
         int index = 0;
+        setProgress(0);
         for (File f : imageFiles){
+            if (this.isCancelled()) break;
+            
             transforms.clear();
             try {
 //                    create the buffered image based on the selected file
@@ -57,19 +64,46 @@ public class ImageWorker extends SwingWorker<String, String>{
                       int height = baseImage.getHeight();
                       int width = baseImage.getWidth();
                       //create the Colorspace Transforms
-                      if (conversionMap.get("HSI")) transforms.add(new HSIToGray(width, height));
-                      if (conversionMap.get("HSL")) transforms.add(new HSLToGray(width, height));
-                      if (conversionMap.get("HSV")) transforms.add(new HSVToGray(width, height));
-                      if (conversionMap.get("LAlphaBeta")) transforms.add(new LAlphaBetaToGray(width, height));
-                      if (conversionMap.get("LMS")) transforms.add(new LMSToGray(width, height));
-                      if (conversionMap.get("Lab")) transforms.add(new LabToGray(width, height));
-                      if (conversionMap.get("Luv")) transforms.add(new LuvToGray(width, height));
-                      if (conversionMap.get("RGB")) transforms.add(new RGBToGray(width, height));
-                      if (conversionMap.get("XYZ")) transforms.add(new XYZToGray(width, height));
-                      if (conversionMap.get("Ohta")) transforms.add(new OhtaToGray(width, height));
-                      if (conversionMap.get("601")) transforms.add(new SixZeroOneToGray(width, height));
-                      if (conversionMap.get("709")) transforms.add(new SevenZeroNineToGray(width, height));
-                      if (conversionMap.get("rgbChroma")) transforms.add(new RGBChromaToGray(width, height));
+                      if (conversionMap.get("HSI")){
+                          transforms.add(new HSIToGray(width, height));
+                      }
+                      if (conversionMap.get("HSL")) {
+                          transforms.add(new HSLToGray(width, height));
+                      }
+                      if (conversionMap.get("HSV")) {
+                          transforms.add(new HSVToGray(width, height));
+                      }
+                      if (conversionMap.get("LAlphaBeta")) {
+                          transforms.add(new LAlphaBetaToGray(width, height));
+                      }
+                      if (conversionMap.get("LMS")) {
+                          transforms.add(new LMSToGray(width, height));
+                      }
+                      if (conversionMap.get("Lab")) {
+                          transforms.add(new LabToGray(width, height));
+                      }
+                      if (conversionMap.get("Luv")) {
+                          transforms.add(new LuvToGray(width, height));
+                      }
+                      if (conversionMap.get("RGB")) {
+                          transforms.add(new RGBToGray(width, height));
+                      }
+                      if (conversionMap.get("XYZ")) {
+                          transforms.add(new XYZToGray(width, height));
+                      }
+                      if (conversionMap.get("Ohta")) {
+                          transforms.add(new OhtaToGray(width, height));
+                      }
+                      if (conversionMap.get("601")) {
+                          transforms.add(new SixZeroOneToGray(width, height));
+                      }
+                      if (conversionMap.get("709")) {
+                          transforms.add(new SevenZeroNineToGray(width, height));
+                      }
+                      if (conversionMap.get("rgbChroma")) {
+                          transforms.add(new RGBChromaToGray(width, height));
+                      }
+                      
                       //Run through the image pixels and update pixels of necessary transforms
                       for (int h=0; h<height; h++){
                         for (int w=0; w<width; w++){
@@ -77,12 +111,10 @@ public class ImageWorker extends SwingWorker<String, String>{
                             Color gammaRemovedPixel = TurnerUtil.invertGamma(rgbPixel);
                             
                             for (ColorspaceTransform ct : transforms){
-                                System.out.println(ct.getColorSpace().toString());
                                 ColorSpace cs = ct.getColorSpace();
                                 if ((cs == ColorSpace.XYZ) || (cs == ColorSpace.Lab) || (cs == ColorSpace.Luv) || (cs == ColorSpace.LMS) || (cs == ColorSpace.LAlphaBeta)){
                                     ct.setPixelColor(gammaRemovedPixel, w, h);
                                 } else {
-                                    System.out.println("setting pixel"); //for some reason the HS color spaces aren't even reaching this point.
                                     ct.setPixelColor(rgbPixel, w, h);
                                 }
                             }
@@ -110,12 +142,18 @@ public class ImageWorker extends SwingWorker<String, String>{
             
             ++index;
             publish("working");
-            setProgress((index/imageFiles.size())*100);
+            setProgress((int)(((index * 1.0)/imageFiles.size())*100));
             }
         
         System.out.println("done");
         
         return "done";
+    }
+    
+    @Override
+    public void done(){
+        runButton.setEnabled(true);
+        cancelButton.setEnabled(false);
     }
     
 }
