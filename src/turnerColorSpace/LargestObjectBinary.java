@@ -33,7 +33,7 @@ public class LargestObjectBinary {
         binarySource = gtb.getBinaryImages();
         binaryImages = new BufferedImage[binarySource.length];
         
-        System.out.println("Largest binary initialized");
+        //System.out.println("Largest binary initialized");
         
         for (int i = 0; i < binarySource.length; i++){
             binaryImages[i] = new BufferedImage(binarySource[i].getWidth(), binarySource[i].getHeight(), BufferedImage.TYPE_BYTE_BINARY);
@@ -46,17 +46,19 @@ public class LargestObjectBinary {
             Hashtable<Integer, Integer> labels = new Hashtable();
             Hashtable<Integer, Integer> sizes = new Hashtable();
             
-            System.out.println("Starting on channel " + i);
+            //System.out.println("Starting on channel " + i);
             
-            for (int h = 0; h < binarySource[i].getWidth(); h++){
-                for (int w = 0; w < binarySource[i].getHeight(); w++){
+            for (int h = 0; h < binarySource[i].getHeight(); h++){
+                for (int w = 0; w < binarySource[i].getWidth(); w++){
                     
                     //Four-way check
                     //initialize variables for check
                     int sample = sourceRaster.getSample(w, h, 0);
                     
+                    //System.out.println(sample);
+                    
                     //Check neighbors and label similar
-                    if (sample == 1){ //if there's a black pixel
+                    if (sample < 1){ //if there's a black pixel
                         
                         //System.out.println("Black pixel found");
                         
@@ -64,29 +66,33 @@ public class LargestObjectBinary {
                         int north;
                         int west;
                     
-                        //make sure we're not on the edge, mark when pixel doesn't have a west or north neighbor with a -1
+                        //make sure we're not on the edge, mark when pixel doesn't have a west or north neighbor with a 1
                         if (h == 0){
-                            north = -1;
+                            north = 1;
                         } else north = sourceRaster.getSample(w, h-1, 0);
                         if (w == 0){
-                            west = -1;
+                            west = 1;
                         } else west = sourceRaster.getSample(w-1, h, 0);
                         
                         //Check neighboring pixels...
-                        if (west >= 1){
+                        if (west < 1){
                             labeledPixels[w][h] = labeledPixels[w-1][h]; //set label to same as west neighbor
-                        } else if (north >= 1){
+                        }
+                        if (north < 1){
                             labeledPixels[w][h] = labeledPixels[w][h-1]; //set label to same as north neighbor
-                        } else {
+                        }
+                        if (north >= 1 && west >= 1) {
                             labeledPixels[w][h] = currentLabel; //no neighbors, set to a new label
                             currentLabel++; //change current label so next new label will be different
                         }
                         
-                        //System.out.println(labeledPixels[w][h]);
                         
                         //set equivalence
-                        if (west >= 1 && north >= 1){
+                        if (west < 1 && north < 1){
+                            //labels.put(labeledPixels[w-1][h], labeledPixels[w][h-1]);
                             labels.put(labeledPixels[w-1][h], labeledPixels[w][h-1]);
+                            labels.put(labeledPixels[w][h-1], labeledPixels[w-1][h]);
+                            System.out.println(labeledPixels[w-1][h] + " is equal to " + labeledPixels[w][h-1]);
                             //labels.put(labeledPixels[w][h-1], labeledPixels[w-1][h]); //don't think I need this
                         }
                     }
@@ -94,11 +100,11 @@ public class LargestObjectBinary {
                 }
             }
             
-            System.out.println("First pass finished");
+            //System.out.println("First pass finished");
             
             //Second Pass - unify touching object labels and find biggest object
-            for (int h = 0; h < labeledPixels.length; h++){
-                for (int w = 0; w < labeledPixels[h].length; w++){
+            for (int h = 0; h < binarySource[i].getHeight(); h++){
+                for (int w = 0; w < binarySource[i].getWidth(); w++){
                     
                     //for each labelled pixel
                     if (labeledPixels[w][h] > 0){
@@ -119,23 +125,41 @@ public class LargestObjectBinary {
                 
                 }
             }
+            
+            //System.out.println("Second Pass Finished");
+            
             //Find the biggest label
-            int biggest = 0;
+            int biggest = 1;
             Set<Integer> keys = sizes.keySet();
-            for (int size : keys){
-                if (sizes.get(size) > biggest) biggest = sizes.get(size);
+            for (int reference : keys){
+                //System.out.println(reference);
+                if (sizes.get(reference) > sizes.get(biggest)) {
+                    biggest = reference;
+                    //System.out.println("Biggest is now " + biggest);
+                }
             }
             
+            //test section
+            for (int reference : keys){
+                System.out.println(reference + " has " + sizes.get(reference) + " points");
+            }
+            
+//            System.out.println("Biggest Label found");
+//            System.out.println(biggest);
+            
             //Third pass - write only the largest object to the image raster for Binary Output
-            for (int h = 0; h < labeledPixels.length; h++){
-                for (int w = 0; w < labeledPixels[h].length; w++){
+            for (int h = 0; h < binarySource[i].getHeight(); h++){
+                for (int w = 0; w < binarySource[i].getWidth(); w++){
+                    //System.out.println("Label: " + labeledPixels[w][h]);
                     if (labeledPixels[w][h] == biggest){
-                        outputRaster.setSample(w, h, 0, 1);
-                    } else {
                         outputRaster.setSample(w, h, 0, 0);
+                    } else {
+                        outputRaster.setSample(w, h, 0, 1);
                     }
                 }
             }
+            
+            //System.out.println("Third Pass finished");
         }
     }
     
