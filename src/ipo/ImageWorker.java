@@ -131,7 +131,9 @@ public class ImageWorker extends SwingWorker<String, String>{
                         OtsuThreshold otsu = new OtsuThreshold();
                         for (ColorspaceTransform ct : transforms){
                             GrayToBinary temp = new GrayToBinary(ct.getGrayscaleImages(), otsu);
+                            System.out.println("Gray to Binary finished");
                             LargestObjectBinary temp2 = new LargestObjectBinary(temp);
+                            
                             //temp.writeBinaryImages(outputFolder, f.getName() + ct.getColorSpace().toString() + "Binary");
                             temp2.writeBinaryImages(outputFolder, f.getName() + ct.getColorSpace().toString() + "Binary");
                         }

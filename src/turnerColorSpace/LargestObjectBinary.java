@@ -34,7 +34,7 @@ public class LargestObjectBinary {
         binarySource = gtb.getBinaryImages();
         binaryImages = new BufferedImage[binarySource.length];
         
-        //System.out.println("Largest binary initialized");
+        System.out.println("Largest binary initialized");
         
         for (int i = 0; i < binarySource.length; i++){
             binaryImages[i] = new BufferedImage(binarySource[i].getWidth(), binarySource[i].getHeight(), BufferedImage.TYPE_BYTE_BINARY);
@@ -47,7 +47,7 @@ public class LargestObjectBinary {
             HashMap<Integer, ArrayList<Integer>> labels = new HashMap();
             HashMap<Integer, Integer> sizes = new HashMap();
             
-            //System.out.println("Starting on channel " + i);
+            System.out.println("Starting on channel " + i);
             
             for (int h = 0; h < binarySource[i].getHeight(); h++){
                 for (int w = 0; w < binarySource[i].getWidth(); w++){
@@ -112,7 +112,7 @@ public class LargestObjectBinary {
                 }
             }
             
-            //System.out.println("First pass finished");
+            System.out.println("First pass finished");
             
             //Second Pass - unify touching object labels and find biggest object
             for (int h = 0; h < binarySource[i].getHeight(); h++){
@@ -148,11 +148,16 @@ public class LargestObjectBinary {
                 }
             }
             
-            //System.out.println("Second Pass Finished");
+            System.out.println("Second Pass Finished");
             
-            //Find the biggest label
+            //Find the biggest label --This isn't working sometimes, figure out why.
             int biggest = 1;
             Set<Integer> keys = sizes.keySet();
+            
+            if (!(sizes.containsKey(biggest))){
+                biggest = (int) keys.toArray()[0];
+            }
+            
             for (int reference : keys){
                 //System.out.println(reference);
                 if (sizes.get(reference) > sizes.get(biggest)) {
@@ -181,7 +186,7 @@ public class LargestObjectBinary {
                 }
             }
             
-            //System.out.println("Third Pass finished");
+            System.out.println("Third Pass finished");
         }
     }
     
