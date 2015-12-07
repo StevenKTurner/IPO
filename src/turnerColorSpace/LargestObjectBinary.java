@@ -10,7 +10,8 @@ import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Hashtable;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,8 +44,8 @@ public class LargestObjectBinary {
             //using algorithm for connectivity as described on https://en.wikipedia.org/wiki/Connected-component_labeling
             int[][] labeledPixels = new int[binarySource[i].getWidth()][binarySource[i].getHeight()];
             int currentLabel = 1;
-            Hashtable<Integer, Integer> labels = new Hashtable();
-            Hashtable<Integer, Integer> sizes = new Hashtable();
+            HashMap<Integer, ArrayList<Integer>> labels = new HashMap();
+            HashMap<Integer, Integer> sizes = new HashMap();
             
             //System.out.println("Starting on channel " + i);
             
@@ -90,10 +91,21 @@ public class LargestObjectBinary {
                         //set equivalence
                         if (west < 1 && north < 1){
                             //labels.put(labeledPixels[w-1][h], labeledPixels[w][h-1]);
-                            labels.put(labeledPixels[w-1][h], labeledPixels[w][h-1]);
-                            labels.put(labeledPixels[w][h-1], labeledPixels[w-1][h]);
-                            System.out.println(labeledPixels[w-1][h] + " is equal to " + labeledPixels[w][h-1]);
+                            //labels.put(labeledPixels[w-1][h], labeledPixels[w][h-1]); //Ah, this won't work!  It will replace equivalence with the latest value!
+                            //labels.put(labeledPixels[w][h-1], labeledPixels[w-1][h]);
+                            //System.out.println(labeledPixels[w-1][h] + " is equal to " + labeledPixels[w][h-1]);
                             //labels.put(labeledPixels[w][h-1], labeledPixels[w-1][h]); //don't think I need this
+                            
+                            //Check to see if key (the label value) is in labels hashtable
+                            if (labels.containsKey(labeledPixels[w-1][h])){
+                                //if so, add the other label value to the first value's arraylist
+                                ArrayList<Integer> temp = labels.get(labeledPixels[w-1][h]);
+                                temp.add(labeledPixels[w][h-1]);
+                            } else { //if not, create a new arraylist under that key and add the value
+                                labels.put(labeledPixels[w-1][h], new ArrayList<Integer>());
+                                labels.get(labeledPixels[w-1][h]).add(labeledPixels[w][h-1]);
+                            }
+                            //
                         }
                     }
                     
@@ -109,9 +121,19 @@ public class LargestObjectBinary {
                     //for each labelled pixel
                     if (labeledPixels[w][h] > 0){
                         
-                        //Check if it's in the equivalence hashtable, and if so set it to the value decided in that table
-                        if (labels.containsKey(labeledPixels[w][h])){
-                            labeledPixels[w][h] = labels.get(labeledPixels[w][h]);
+//                        //Check if it's in the equivalence hashtable, and if so set it to the value decided in that table
+//                        if (labels.containsKey(labeledPixels[w][h])){
+//                            //labeledPixels[w][h] = labels.get(labeledPixels[w][h]);
+//                            
+//                            
+//                        }
+                        
+                        //search through the labels to see if the label value is in an arraylist, and if so set it to the HashMap key
+                        for (Map.Entry<Integer, ArrayList<Integer>> entry : labels.entrySet()){
+                            if (entry.getValue().contains(labeledPixels[w][h])){
+                                labeledPixels[w][h] = entry.getKey();
+                                break; //break to set it to first found value
+                            }
                         }
                         
                         //mark size increase for that label
